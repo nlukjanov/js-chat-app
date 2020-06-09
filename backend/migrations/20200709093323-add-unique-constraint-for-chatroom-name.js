@@ -2,7 +2,8 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.addConstraint('ChatRooms', ['name'], {
+    return queryInterface.addConstraint('ChatRooms', {
+      fields: ['name'],
       type: 'unique',
       name: 'unique_name'
     });
