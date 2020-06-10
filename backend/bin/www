@@ -39,12 +39,12 @@ io.on('connection', (socket) => {
       where: { name: chatRoomName }
     });
     const chatRoomId = chatRoom[0].id;
-    const chatMessage = await models.ChatMessage.create({
+    const chatRoomMessage = await models.chatRoomMessage.create({
       chatRoomId,
       author,
       message: message
     });
-    io.emit('newMessage', chatMessage);
+    io.emit('newMessage', chatRoomMessage);
   });
 });
 
