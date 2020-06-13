@@ -119,3 +119,5 @@ const ChatRoomPage = () => {
     </div>
   );
 };
+
+export default ChatRoomPage;
