@@ -83,7 +83,11 @@ const ChatRoomPage = () => {
           );
         })}
       </div>
-      <Formik validationSchema={schema} onSubmit={handleSubmit}>
+      <Formik
+        initialValues={{ message: '' }}
+        validationSchema={schema}
+        onSubmit={handleSubmit}
+      >
         {({
           handleSubmit,
           handleChange,
@@ -101,7 +105,7 @@ const ChatRoomPage = () => {
                   type='text'
                   name='message'
                   placeholder='Message'
-                  value={values.message || ''}
+                  value={(values && values.message) || ''}
                   onChange={handleChange}
                   isInvalid={touched.message && errors.message}
                 />
