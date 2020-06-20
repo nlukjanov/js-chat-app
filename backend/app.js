@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.use('/', indexRouter);
-app.use('/chatRoom', chatRoomRouter);
+app.use('/chatroom', chatRoomRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
