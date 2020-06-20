@@ -4,6 +4,8 @@ import HomePage from './HomePage';
 import TopBar from './TopBar';
 import { createBrowserHistory } from 'history';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import ChatRoomPage from './ChatRoomPage';
 
 const history = createBrowserHistory();
