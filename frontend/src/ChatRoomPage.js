@@ -28,7 +28,8 @@ const ChatRoomPage = () => {
     const isValid = await schema.validate(event);
     if (!isValid) return;
     const data = Object.assign({}, event);
-    data.chatRoomName = getChatData().handle;
+    data.chatRoomName = getChatData().chatRoomName;
+    data.author = getChatData().handle;
     data.message = event.message;
     socket.emit('message', data);
   };
@@ -105,7 +106,7 @@ const ChatRoomPage = () => {
                   type='text'
                   name='message'
                   placeholder='Message'
-                  value={(values && values.message) || ''}
+                  value={values.message || ''}
                   onChange={handleChange}
                   isInvalid={touched.message && errors.message}
                 />
