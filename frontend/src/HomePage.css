@@ -2,3 +2,12 @@
   width: 90vw;
   margin: 0 auto;
 }
+.button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.chat-room-button {
+  margin: 1rem 0;
+}

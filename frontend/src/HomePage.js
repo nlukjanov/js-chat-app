@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik } from 'formik';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import * as yup from 'yup';
 import { Redirect } from 'react-router';
 import './HomePage.css';
-import { joinRoom } from './requests';
+import { joinRoom, getChatRooms } from './requests';
 
 const schema = yup.object({
   handle: yup.string().required('Handle is required'),
@@ -15,7 +15,15 @@ const schema = yup.object({
 
 const HomePage = () => {
   const [redirect, setRedirect] = useState(false);
+  const [initialized, setInitialized] = useState(false);
+  const [rooms, setRooms] = useState([]);
   const handleSubmit = async (event) => {
+    if (event.type === 'click') {
+      console.log('event', event.target);
+      const handle = document.getElementById('handle');
+      const chatRoomName = document.getElementById('chatRoomName');
+      event = { handle: handle.value, chatRoomName: chatRoomName.value };
+    }
     const isValid = await schema.validate(event);
     if (!isValid) return;
     localStorage.setItem('chatData', JSON.stringify(event));
@@ -23,11 +31,37 @@ const HomePage = () => {
     setRedirect(true);
   };
 
+  const getRooms = async () => {
+    const response = await getChatRooms();
+    setRooms(response.data);
+    setInitialized(true);
+  };
+
+  useEffect(() => {
+    if (!initialized) {
+      getRooms();
+    }
+  }, [initialized]);
+
   if (redirect) return <Redirect to='/chatroom' />;
 
   return (
     <div className='home-page'>
-      <h1>Join Chat</h1>
+      <h2>Available Chat Rooms</h2>
+      <div className='button-container'>
+        {rooms.map((room, index) => {
+          return (
+            <Button
+              className='chat-room-button'
+              onClick={handleSubmit}
+              key={index}
+            >
+              {room.name}
+            </Button>
+          );
+        })}
+      </div>
+      <h2>Join Chat</h2>
       <Formik
         validationSchema={schema}
         onSubmit={handleSubmit}
