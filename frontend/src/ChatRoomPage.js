@@ -25,7 +25,6 @@ const ChatRoomPage = () => {
   const [rooms, setRooms] = useState([]);
 
   const handleSubmit = async (event) => {
-    console.log('running');
     const isValid = await schema.validate(event);
     if (!isValid) return;
     const data = Object.assign({}, event);
@@ -33,7 +32,6 @@ const ChatRoomPage = () => {
     data.author = getChatData().handle;
     data.message = event.message;
     socket.emit('message', data);
-    console.log('event', event);
   };
 
   const connectToRoom = () => {

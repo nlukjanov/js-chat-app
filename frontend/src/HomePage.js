@@ -19,10 +19,10 @@ const HomePage = () => {
   const [rooms, setRooms] = useState([]);
   const handleSubmit = async (event) => {
     if (event.type === 'click') {
-      console.log('event', event.target);
+      console.log('event', event.target)
       const handle = document.getElementById('handle');
-      const chatRoomName = document.getElementById('chatRoomName');
-      event = { handle: handle.value, chatRoomName: chatRoomName.value };
+      // const chatRoomName = document.getElementById('chatRoomName');
+      event = { handle: handle.value, chatRoomName: event.target.textContent };
     }
     const isValid = await schema.validate(event);
     if (!isValid) return;

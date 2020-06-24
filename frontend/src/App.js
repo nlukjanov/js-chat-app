@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, Link } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import HomePage from './HomePage';
 import TopBar from './TopBar';
 import { createBrowserHistory } from 'history';
